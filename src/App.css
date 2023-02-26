@@ -28,3 +28,11 @@
 .movie-summary{
  margin-top: 0;
 }
+.add-movie{
+  display: flex;
+   flex-direction: column;
+   gap: 5px;
+
+  max-width: 500px;
+  margin: 10px auto; 
+}
