@@ -6,7 +6,7 @@ export default function App(){
   return(
     <div>
       <MovieList />
-      <AddColor />
+      {/* <AddColor /> */}
     </div>
   )
 }
