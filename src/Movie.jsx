@@ -9,8 +9,10 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-
-export function Movie({ movie }) {
+import InfoIcon from '@mui/icons-material/Info';
+import {useNavigate}from "react-router-dom";
+export function Movie({ movie,id }) {
+  const navigate=useNavigate();
   const styles = {
     color: movie.rating > 8.5 ? "crimson" : "green",
   };
@@ -29,6 +31,9 @@ export function Movie({ movie }) {
       
       <IconButton color='primary' onClick={() => setShow(!show)} aria-label="Toggle summary">
           { show ? <ExpandLessIcon />: <ExpandMoreIcon />}
+       </IconButton>
+       <IconButton color='primary' onClick={() =>navigate("/movies/" + id) } aria-label="Movie-details">
+          <InfoIcon />
        </IconButton>
       
     

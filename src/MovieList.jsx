@@ -98,8 +98,8 @@ export function MovieList() {
         }} variant="contained">Add Movie</Button>
       </div>
       <div className='movie-list'>
-        {movieList.map((mv) => (
-          <Movie movie={mv} />))}
+        {movieList.map((mv,index) => (
+          <Movie key={index} movie={mv} id={index} />))}
       </div>
     </div>
 
