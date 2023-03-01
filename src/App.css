@@ -37,3 +37,23 @@
   max-width: 500px;
   margin: 10px auto; 
 }
+.game-box{
+  border: 1px solid black;
+  font-size: 160px;
+  height: 160px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor:pointer;
+}
+.game-box:hover{
+ background-color: antiquewhite;
+}
+.board{
+  display: grid;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns:repeat(3,1fr) ;
+  width: min-content;
+  margin: 0 auto;
+}
