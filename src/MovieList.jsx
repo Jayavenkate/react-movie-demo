@@ -1,35 +1,17 @@
-import { useState } from 'react';
-import Button from '@mui/material/Button';
 import { Movie } from "./Movie";
-import TextField from '@mui/material/TextField';
+import { AddMovie } from './AddMovie';
+import { useState,useEffect } from 'react';
 
 
-export function MovieList({movieList},{setmovieList}) {
-  
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
-
-
-  return (
+export function MovieList() {
+  const [movieList, setMovieList] = useState([]);
+  useEffect(()=>{
+    fetch("https://63dfc41859bccf35dab93fd4.mockapi.io/movies")
+    .then((data)=>data.json())
+    .then((mvs)=>setMovieList(mvs));
+  },[]);
+   return (
     <div>
-      <div className='add-movie'>
-      <TextField onChange={(event) => setName(event.target.value)} label="Name" variant="outlined" />
-       <TextField onChange={(event) => setPoster(event.target.value)}  label='Poster' variant="outlined"  />
-        <TextField onChange={(event) => setRating(event.target.value)}  label='Rating'  variant="outlined" />
-        <TextField onChange={(event) => setSummary(event.target.value)}  label='Summary' variant="outlined"  />
-
-        <Button onClick={() => {
-          const newMovie = {
-            name: name,
-            poster: poster,
-            rating: rating,
-            summary: summary
-          };
-          setmovieList([...movieList, newMovie]);
-        }} variant="contained">Add Movie</Button>
-      </div>
       <div className='movie-list'>
         {movieList.map((mv,index) => (
           <Movie key={index} movie={mv} id={index} />))}

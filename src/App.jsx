@@ -9,6 +9,8 @@ import { TicTacToe } from './TicTacToe';
 import { Routes, Route, Link, useParams ,useNavigate, Navigate} from "react-router-dom";
 import { NotFound } from './NotFound';
 import { Home } from './Home';
+import { AddMovie } from './AddMovie';
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -123,6 +125,7 @@ export default function App(){
     borderRadius:"0px",
   minHeight:"100vh"
   }
+ 
   return(
     <ThemeProvider theme={darkTheme}> 
     <Paper style={bgstyles} elevation={4} >
@@ -131,11 +134,13 @@ export default function App(){
        <AppBar position="static">
         <Toolbar>
           <Button onClick={()=>navigate("/")} color="inherit">Home</Button>
-          <Button  onClick={()=>navigate("/movies")} color="inherit">MovieList</Button>
+          <Button  onClick={()=>navigate("/movies")} color="inherit">Movies</Button>
 
           <Button  onClick={()=>navigate("/color-game")} color="inherit">AddColor</Button>
           <Button  onClick={()=>navigate("/tic-tac-toe")} color="inherit">TicTacToe</Button>
-          <Button  onClick={()=>setMode(mode=="light"?"dark":"light")} color="inherit"
+          <Button  onClick={()=>navigate("/movies/add")} color="inherit">AddMovie</Button>
+
+          <Button sx={{marginLeft:'auto'}} onClick={()=>setMode(mode=="light"?"dark":"light")} color="inherit"
           startIcon={mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
           >{mode=="light"?"dark":"light"} Mode</Button>
 
@@ -147,11 +152,14 @@ export default function App(){
         <Route path="/" element={<Home />} />
         <Route path="/filims" element={<Navigate replace to="/movies"/>} />
 
-        <Route path="/movies" element={<MovieList movieList={movieList} setmovieList={setmovieList}/>} />
+        <Route path="/movies" element={<MovieList />} />
         <Route path="/movies/:id" element={<MovieDetails movieList={movieList}/>} />
 
         <Route path="/color-game" element={<AddColor />} />
         <Route path="/tic-tac-toe" element={<TicTacToe />} />
+    
+        <Route path="/movies/add" element={<AddMovie movieList={movieList}setmovieList={setmovieList} /> } />
+
         <Route path="*" element={<NotFound />} />
 
       </Routes>
