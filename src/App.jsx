@@ -6,7 +6,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { MovieList } from './MovieList';
 import { AddColor } from './AddColor';
 import { TicTacToe } from './TicTacToe';
-import { Routes, Route, Link, useParams ,useNavigate, Navigate} from "react-router-dom";
+import { Routes, Route, Link, useNavigate, Navigate} from "react-router-dom";
 import { NotFound } from './NotFound';
 import { Home } from './Home';
 import { AddMovie } from './AddMovie';
@@ -18,9 +18,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7'; 
+import { MovieDetails } from './MovieDetails';
 
 export default function App(){
   const Initial_Movie_List=[{
@@ -153,7 +153,7 @@ export default function App(){
         <Route path="/filims" element={<Navigate replace to="/movies"/>} />
 
         <Route path="/movies" element={<MovieList />} />
-        <Route path="/movies/:id" element={<MovieDetails movieList={movieList}/>} />
+        <Route path="/movies/:id" element={<MovieDetails />} />
 
         <Route path="/color-game" element={<AddColor />} />
         <Route path="/tic-tac-toe" element={<TicTacToe />} />
@@ -168,37 +168,4 @@ export default function App(){
     </ThemeProvider>
   );
 }
-function MovieDetails({movieList}){
-const navigate=useNavigate();
-  const {id}= useParams();
-  const movie = movieList[id];
-  console.log(movie);
-  const styles = {
-    color: movie.rating > 8.5 ? "crimson" : "green",
-  };
-  return(
-    <div>
-      <iframe 
-      width="100%"
-       height="650"
-       src={movie.trailer}
-        title="Varisu Movie Review Canada | Thalapathy Vijay | Rashmika | Sarathkumar | Prakash Raj|வாரிசு |Vamshi" 
-        frameborder="0"
-         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-         allowfullscreen>
-
-         </iframe>
-
-    <div  className="movie-detail-container">
-      <div className='name-rating'>
-        <h2 className="movie-name">{movie.name}</h2>
-        <p style={styles} className='movie-rating'>⭐{movie.rating}</p>
-      </div>
-      <p className='movie-summary'>{movie.summary}</p>
-      <Button startIcon={<KeyboardBackspaceIcon />} variant="contained" onClick={()=>navigate(-1)}>Back</Button>
-    </div >
-    </div>
-  )
-}
-
 
