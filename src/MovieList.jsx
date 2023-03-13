@@ -2,7 +2,9 @@ import { Movie } from "./Movie";
 import { AddMovie } from './AddMovie';
 import { useState,useEffect} from 'react';
 import { buttonBaseClasses } from "@mui/material";
-
+import Stack from '@mui/material/Stack';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
@@ -32,9 +34,15 @@ export function MovieList() {
       <div className='movie-list'>
         {movieList.map((mv) => (
           <Movie key={mv.id} movie={mv} id={mv.id}
-          deleteButton={<button onClick={()=>deleteMovie(mv.id)}>Delete</button>} />))}
+          // <button onClick={()=>deleteMovie(mv.id)}>Delete</button>
+          deleteButton={<IconButton  sx={{marginLeft:"auto"}}color="error" onClick={()=>deleteMovie(mv.id)} aria-label="delete" >
+             <DeleteIcon   />
+           </IconButton>} 
+          />))}
       </div>
     </div>
-
+//   <IconButton aria-label="delete" size="small">
+//   <DeleteIcon fontSize="inherit" />
+// </IconButton>
   );
 }
