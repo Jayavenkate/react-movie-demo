@@ -11,6 +11,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import InfoIcon from '@mui/icons-material/Info';
 import {useNavigate}from "react-router-dom";
+
 export function Movie({ movie,id,deleteButton }) {
   const navigate=useNavigate();
   const styles = {
