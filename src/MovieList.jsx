@@ -41,8 +41,5 @@ export function MovieList() {
           />))}
       </div>
     </div>
-//   <IconButton aria-label="delete" size="small">
-//   <DeleteIcon fontSize="inherit" />
-// </IconButton>
   );
 }
