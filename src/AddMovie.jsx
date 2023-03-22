@@ -34,9 +34,8 @@ const navigate=useNavigate();
       <TextField onChange={(event) => setRating(event.target.value)} label='Rating' variant="outlined" />
       <TextField onChange={(event) => setSummary(event.target.value)} label='Summary' variant="outlined" />
       <TextField onChange={(event) => setTrailer(event.target.value)} label='Trailer' variant="outlined" />
-
-
       <Button onClick={addMovie} variant="contained">Add Movie</Button>
     </div>
   );
 }
+ 
