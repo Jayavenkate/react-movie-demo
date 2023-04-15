@@ -1,41 +1,102 @@
-import { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
 
+const formValidationSchema = yup.object({
+  name: yup
+    .string()
+    .required("Why not fill this email?")
+    .min(12, "Need a bigger email😍"),
+  poster: yup
+    .string()
+    .url()
+    .required("why not fill this password?")
+    .min(4, "Need a bigger password")
+    .max(10),
+});
 export function AddMovie() {
-  const [name, setName] = useState("");
-  const [poster, setPoster] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
-  const [trailer, setTrailer] = useState("");
-const navigate=useNavigate();
-  const addMovie=()=>{
-    const newMovie = {
-      name: name,
-      poster: poster,
-      rating: rating,
-      summary: summary,
-      trailer:trailer,
-    };
-    console.log(newMovie);
-    fetch("https://63dfc41859bccf35dab93fd4.mockapi.io/movies",{
-      method:"POST",
-      body:JSON.stringify(newMovie),
-      headers:{"Content-Type": "application/json",},
-      
-    })
-   navigate("/movies");
-  }
+  const { handleSubmit, handleChange, handleBlur, values, touched, errors } =
+    useFormik({
+      initialValues: {
+        name: "",
+        poster: "",
+        rating: "",
+        summary: "",
+        trailer: "",
+      },
+      validationSchema: formValidationSchema,
+      onSubmit: (values) => console.log("Form values", values),
+    });
+  const navigate = useNavigate();
+  const addMovie = () => {
+    // const newMovie = {
+    //   name: name,
+    //   poster: poster,
+    //   rating: rating,
+    //   summary: summary,
+    //   trailer: trailer,
+    // };
+    // console.log(newMovie);
+    // fetch(`${API}/movies`, {
+    //   method: "POST",
+    //   body: JSON.stringify(newMovie),
+    //   headers: { "Content-Type": "application/json" },
+    // });
+    // navigate("/movies");
+  };
   return (
-    <div className='add-movie'>
-      <TextField onChange={(event) => setName(event.target.value)} label="Name" variant="outlined" />
-      <TextField onChange={(event) => setPoster(event.target.value)} label='Poster' variant="outlined" />
-      <TextField onChange={(event) => setRating(event.target.value)} label='Rating' variant="outlined" />
-      <TextField onChange={(event) => setSummary(event.target.value)} label='Summary' variant="outlined" />
-      <TextField onChange={(event) => setTrailer(event.target.value)} label='Trailer' variant="outlined" />
-      <Button onClick={addMovie} variant="contained">Add Movie</Button>
-    </div>
+    <form onSubmit={handleSubmit} className="add-movie">
+      <TextField
+        name="name"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Name"
+        variant="outlined"
+      />
+      {touched.name && errors.name ? errors.name : null}
+
+      <TextField
+        name="poster"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Poster"
+        variant="outlined"
+      />
+      {touched.poster && errors.poster ? errors.poster : null}
+
+      <TextField
+        name="Rating"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Rating"
+        variant="outlined"
+      />
+      {touched.rating && errors.rating ? errors.rating : null}
+
+      <TextField
+        name="Summary"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Summary"
+        variant="outlined"
+      />
+      {touched.summary && errors.summary ? errors.summary : null}
+
+      <TextField
+        name="Trailer"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        label="Trailer"
+        variant="outlined"
+      />
+      {touched.trailer && errors.trailer ? errors.trailer : null}
+
+      <Button type="submit" variant="contained">
+        Add Movie
+      </Button>
+    </form>
   );
 }
- 

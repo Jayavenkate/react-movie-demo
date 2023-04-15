@@ -140,6 +140,7 @@ export default function App(){
           <Button  onClick={()=>navigate("/color-game")} color="inherit">AddColor</Button>
           <Button  onClick={()=>navigate("/tic-tac-toe")} color="inherit">TicTacToe</Button>
           <Button  onClick={()=>navigate("/movies/add")} color="inherit">AddMovie</Button>
+          <Button  onClick={()=>navigate("/basic-form")} color="inherit">BasicForm</Button>
 
           <Button sx={{marginLeft:'auto'}} onClick={()=>setMode(mode=="light"?"dark":"light")} color="inherit"
           startIcon={mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
