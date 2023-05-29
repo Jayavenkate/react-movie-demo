@@ -28,24 +28,17 @@ export function AddMovie() {
         trailer: "",
       },
       validationSchema: formValidationSchema,
-      onSubmit: (values) => console.log("Form values", values),
+      onSubmit: (newmovie) => addMovie(newmovie),
     });
   const navigate = useNavigate();
-  const addMovie = () => {
-    // const newMovie = {
-    //   name: name,
-    //   poster: poster,
-    //   rating: rating,
-    //   summary: summary,
-    //   trailer: trailer,
-    // };
-    // console.log(newMovie);
-    // fetch(`${API}/movies`, {
-    //   method: "POST",
-    //   body: JSON.stringify(newMovie),
-    //   headers: { "Content-Type": "application/json" },
-    // });
-    // navigate("/movies");
+  const addMovie = (newmovie) => {
+  
+    fetch(`${API}/movies`, {
+      method: "POST",
+      body: JSON.stringify(newmovie),
+      headers: { "Content-Type": "application/json" },
+    });
+    navigate("/movies");
   };
   return (
     <form onSubmit={handleSubmit} className="add-movie">
@@ -56,7 +49,7 @@ export function AddMovie() {
         label="Name"
         variant="outlined"
       />
-      {touched.name && errors.name ? errors.name : null}
+      {/* {touched.name && errors.name ? errors.name : null} */}
 
       <TextField
         name="poster"
@@ -65,7 +58,7 @@ export function AddMovie() {
         label="Poster"
         variant="outlined"
       />
-      {touched.poster && errors.poster ? errors.poster : null}
+      {/* {touched.poster && errors.poster ? errors.poster : null} */}
 
       <TextField
         name="Rating"
@@ -74,7 +67,7 @@ export function AddMovie() {
         label="Rating"
         variant="outlined"
       />
-      {touched.rating && errors.rating ? errors.rating : null}
+      {/* {touched.rating && errors.rating ? errors.rating : null} */}
 
       <TextField
         name="Summary"
@@ -83,7 +76,7 @@ export function AddMovie() {
         label="Summary"
         variant="outlined"
       />
-      {touched.summary && errors.summary ? errors.summary : null}
+      {/* {touched.summary && errors.summary ? errors.summary : null} */}
 
       <TextField
         name="Trailer"
@@ -92,7 +85,7 @@ export function AddMovie() {
         label="Trailer"
         variant="outlined"
       />
-      {touched.trailer && errors.trailer ? errors.trailer : null}
+      {/* {touched.trailer && errors.trailer ? errors.trailer : null} */}
 
       <Button type="submit" variant="contained">
         Add Movie

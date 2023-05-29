@@ -14,34 +14,34 @@ import { API } from "./global";
 
 export function EditMovie() {
   const { id } = useParams();
-  // const movie = movieList[id];
-  const [movie, setMovie] = useState({});
+
+  const [movie, setMovie] = useState(null);
   useEffect(() => {
     fetch(`${API}/movies/${id}`)
       .then((data) => data.json())
       .then((mvs) => setMovie(mvs));
-  }, []);
+  }, [id]);
   console.log(movie);
   return movie ? <EditMovieForm movie={movie} /> : <h2>Loading...</h2>;
 
   function EditMovieForm({ movie }) {
-    const [name, setName] = useState("");
-    const [poster, setPoster] = useState("");
-    const [rating, setRating] = useState("");
-    const [summary, setSummary] = useState("");
-    const [trailer, setTrailer] = useState("");
+    const [name, setName] = useState(movie.name);
+    const [poster, setPoster] = useState(movie.poster);
+    const [rating, setRating] = useState(movie.rating);
+    const [summary, setSummary] = useState(movie.summary);
+    const [trailer, setTrailer] = useState(movie.trailer);
     const navigate = useNavigate();
     const addMovie = () => {
       const newMovie = {
-        name: movie.name,
-        poster: movie.poster,
-        rating: movie.rating,
-        summary: movie.summary,
-        trailer: movie.trailer,
+        name: name,
+        poster: poster,
+        rating: rating,
+        summary: summary,
+        trailer: trailer,
       };
       console.log(newMovie);
-      fetch(`${API}/movies`, {
-        method: "POST",
+      fetch(`${API}/movies/${movie.id}`, {
+        method: "PUT",
         body: JSON.stringify(newMovie),
         headers: { "Content-Type": "application/json" },
       });
@@ -53,32 +53,37 @@ export function EditMovie() {
           onChange={(event) => setName(event.target.value)}
           label="Name"
           variant="outlined"
+          value={name}
         />
-        {movie.name}
+
         <TextField
           onChange={(event) => setPoster(event.target.value)}
           label="Poster"
           variant="outlined"
+          value={poster}
         />
-        {movie.poster}
+
         <TextField
           onChange={(event) => setRating(event.target.value)}
           label="Rating"
           variant="outlined"
+          value={rating}
         />
-        {movie.rating}
+
         <TextField
           onChange={(event) => setSummary(event.target.value)}
           label="Summary"
           variant="outlined"
+          value={summary}
         />
-        {movie.summary}
+
         <TextField
           onChange={(event) => setTrailer(event.target.value)}
           label="Trailer"
           variant="outlined"
+          value={trailer}
         />
-        {movie.trailer}
+
         <Button onClick={addMovie} variant="contained">
           Edit Movie
         </Button>

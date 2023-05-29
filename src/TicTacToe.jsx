@@ -15,7 +15,7 @@ export function TicTacToe() {
     <div>
       <h1>TicTacToe Game</h1>
       <div className="board">
-      {board.map((val,index)=>(<GameBox val={val}
+      {board.map((val)=>(<GameBox  val={val}
       onPlayerClick={()=>handClick(index)} />
       ))}
       </div>

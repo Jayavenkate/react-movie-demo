@@ -37,7 +37,7 @@ export function MovieList() {
       <div className="movie-list">
         {movieList.map((mv) => (
           <Movie
-            key={mv.id}
+            key={mv._id}
             movie={mv}
             id={mv.id}
             // <button onClick={()=>deleteMovie(mv.id)}>Delete</button>
